@@ -1,12 +1,12 @@
-require('dotenv').config;
-const express = require('express')
-const app = express();
+const express = require('express');
 
-const port = process.env.PORT || 3000;
+/**
+ * 
+ * @param {express.Request} req 
+ * @param {express.Response} res 
+ */
 
-app.use(express.json());
-
-app.get('/users', (req, res) => {
+const getAllUsers = (req, res) => {
     
     const users = [
         {
@@ -19,9 +19,15 @@ app.get('/users', (req, res) => {
         }
     ]
     res.json(users);
-});
+};
 
-app.post('/users', (req, res) => {
+/**
+ * 
+ * @param {express.Request} req 
+ * @param {express.Response} res 
+ */
+
+const createUser = (req, res) => {
 
     const user = req.body;
     user.id = 823;
@@ -32,9 +38,14 @@ app.post('/users', (req, res) => {
     }
     
     res.status(201).json(result);
-});
+};
 
-app.put('/users/:id', (req, res) => {
+/**
+ * 
+ * @param {express.Request} req 
+ * @param {express.Response} res 
+ */
+const updateUser = (req, res) => {
     
     const user = req.body;
     const { id } = req.params;
@@ -47,9 +58,14 @@ app.put('/users/:id', (req, res) => {
     }
 
     res.json(result);
-});
+};
 
-app.patch('/users/:id', (req, res) => {
+/**
+ * 
+ * @param {express.Request} req 
+ * @param {express.Response} res 
+ */
+const updatePartialUser = (req, res) => {
     const user = req.body;
     const { id } = req.params;
 
@@ -62,9 +78,14 @@ app.patch('/users/:id', (req, res) => {
 
 
     res.json(result);
-});
+};
 
-app.delete('/users/:id', (req, res) => {
+/**
+ * 
+ * @param {express.Request} req 
+ * @param {express.Response} res 
+ */
+const deleteUser =(req, res) => {
     
     const { id } = req.params;
     
@@ -73,8 +94,12 @@ app.delete('/users/:id', (req, res) => {
     }
 
     res.json(result);
-});
+};
 
-app.listen(port, () => {
-    console.log(`######## App started - PORT: ${port} ########`);
-})
+module.exports = {
+    getAllUsers,
+    createUser,
+    updateUser,
+    updatePartialUser,
+    deleteUser
+}
