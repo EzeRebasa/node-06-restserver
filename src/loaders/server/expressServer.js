@@ -11,8 +11,7 @@ class ExpressServer {
     constructor() {
         this.app = express();
         this.port = config.port;
-        this.basePathUser = `${config.api.prefix}/users`;
-
+        this.basePath = config.api.prefix;
 
         this._middlewares();
         this._swaggerConfig();
@@ -22,12 +21,11 @@ class ExpressServer {
         this._notFound();
 
         this._errorHandler();
-
     }
 
     _middlewares() {
         this.app.use(express.json());
-        this.app.use(morgan('tiny'));
+        this.app .use(morgan('tiny'));
     }
 
     _routes() {
@@ -36,7 +34,7 @@ class ExpressServer {
             res.status(200).end();
         });
 
-        this.app.use(this.basePathUser, require('../../routes/users.routes'));
+        this.app.use(`${this.basePath}/users`, require('../../routes/users.routes'));
     }
 
     _notFound() {

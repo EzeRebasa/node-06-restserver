@@ -1,4 +1,6 @@
 const express = require('express');
+const { v4: uuidv4 } = require('uuid');
+
 
 /**
  * 
@@ -10,11 +12,11 @@ const getAllUsers = (req, res) => {
     
     const users = [
         {
-            id: 1,
+            id: uuidv4(),
             name: "Ezequiel"
         },
         {
-            id: 2,
+            id: uuidv4(),
             name: "Marta"
         }
     ]
@@ -31,7 +33,7 @@ const getAllUsers = (req, res) => {
 const createUser = (req, res) => {
 
     const user = req.body;
-    user.id = 823;
+    user.id = uuidv4();
 
     const result = {
         message: 'User created',

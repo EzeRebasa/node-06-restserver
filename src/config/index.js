@@ -1,5 +1,6 @@
 const dotenv = require('dotenv');
 
+//Puede pasar que no haya un .env creado por eso la validación 
 const envFound = dotenv.config();
 
 if(!envFound) {
